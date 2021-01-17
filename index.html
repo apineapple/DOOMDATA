@@ -3,6 +3,13 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+  $( document ).ready(function() {
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ alert("This website is not optimized for mobile devices. At the moment it will only run properly on a computer.");
+}
+});
+</script>
+<script>
 function interview() {
 if (document.getElementById("interview").classList.contains("hidden")){
 $("div#interview").removeClass("hidden");
