@@ -1,383 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-  $( document ).ready(function() {
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
- alert("This website is not optimized for mobile devices. At the moment it will only run properly on a computer.");
-}
-});
-</script>
-<script>
-function interview() {
-if (document.getElementById("interview").classList.contains("hidden")){
-$("div#interview").removeClass("hidden");
-$("div#boogie").addClass("hidden");
-}
-else{
-  $("div#interview").addClass("hidden");
-$("div#boogie").removeClass("hidden");
-}
-}
-</script>
-<script>
-  var spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0';
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="jquery.js"></script>
+      <link rel="stylesheet" href="style.css">
+      <script>
+         var projectListCounter = 0;
+         var projectClickCounter = 0;
+         const projects = [
+            "project title a",
+            "project title b",
+            "project title c",
+            "project title d",
+            "project title e",
+            "project title f"
+         ];
+            function projectList(){
+            while (projectListCounter != projects.length){
+               document.currentScript.insertAdjacentHTML("beforeBegin","<section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'>"+projects[projectListCounter]+"</section>");
+               projectListCounter++;
+            }
+         }
+            function projectModal(clicked_id){
+               var projectId = document.getElementById(clicked_id).innerHTML;
+               while (projectId != projects[projectClickCounter]){
+                  projectClickCounter++;
+                  if (projectClickCounter >= projects.length) {
+                     projectClickCounter = 0;
+                  }
+               }
 
+               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>1. track 1<br>2. track 2<br>3. track 3</p></div><button class='modal-item'>cover art<span class='modal-down'>+</span></button><div class='panel'><div class='cover'><button type='button' class='btn btn left'>&#10094;</button><img src='https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg' class='img' /><button  type='button' class='btn right'>&#10095;</button></div><p class='cover-text'>text</p></div><button class='modal-item'>videos<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><img class='spotify' src='listenicons/spotify.png'><img class='apple' src='listenicons/apple.png'><img class='cd' src='listenicons/cd.png'><img class='vinyl' src='listenicons/vinyl.png'><img class='soundcloud' src='listenicons/soundcloud.png'><img class='youtube' src='listenicons/youtube.png'><img class='deezer' src='listenicons/deezer.png'></div>";
+               var acc = document.getElementsByClassName("modal-item");
+                     var allplus = null;
+                    var plus = null;
+         for (i = 0; i < acc.length; i++) {
+           acc[i].addEventListener("click", function() {
 
-//https://spreadsheets.google.com/feeds/cells/1TTeG6mp2rb61Yxi5KO3GFmZ3qQ3RAMlB9bisLciuj-M/1/public/values?alt=json-in-script&callback=doData The callback function the JSONP request will execute to load data from API
-function doData(data) {
-    // Final results will be stored here  
-    var results = [];
-
-    // Get all entries from spreadsheet
-    var entries = data.feed.entry;
-
-    // Set initial previous row, so we can check if the data in the current cell is from a new row
-    var previousRow = 0;
-
-    // Iterate all entries in the spreadsheet
-    for (var i = 0; i < entries.length; i++) {
-        // check what was the latest row we added to our result array, then load it to local variable
-        var latestRow = results[results.length - 1];
-
-        // get current cell
-        var cell = entries[i];
-
-        // get text from current cell
-        var text = cell.content.$t;
-
-        // get the current row
-        var row = cell.gs$cell.row;
-
-        // Determine if the current cell is in the latestRow or is a new row
-        if (row > previousRow) {
-            // this is a new row, create new array for this row
-            var newRow = [];
-
-            // add the cell text to this new row array  
-            newRow.push(text);
-
-            // store the new row array in the final results array
-            results.push(newRow);
-
-            // Increment the previous row, since we added a new row to the final results array
-            previousRow++;
-        } else {
-            // This cell is in an existing row we already added to the results array, add text to this existing row
-            latestRow.push(text);
-        }
-
+for (let j = 0; j < acc.length; j++) {
+      if(j!=i){     
+             acc[j].classList.remove("active");
+        acc[j].nextElementSibling.style.maxHeight = null;
+      allplus = acc[j].querySelector('.modal-down');
+      allplus.innerHTML = "+";
+      }
     }
+             this.classList.toggle("active");
+             var panel = this.nextElementSibling;
+            plus = this.querySelector('.modal-down');
 
-    handleResults(results);
-}
-
-// Do what ever you please with the final array
-function handleResults(spreadsheetArray) {
-    console.log(spreadsheetArray);
-}
-
-
-
-// Create JSONP Request to Google Docs API, then execute the callback function doData
-$.ajax({
-    url: spreadsheetUrl,
-    jsonp: 'doData',
-    dataType: 'jsonp'
-});
-</script>
-
-    <!--<script>
-function init() {
-          Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vTbCzfsyWnDSejcxFe8uZPj-lodA3yD29RgkqFUY-H16VoH3rDS9ERZwWGZInIxrGYRPIfg7GtaAubO/pubhtml', {
-          download: true,
-          header: true,
-          complete: function(results) {
-            var data = results.data
-            console.log(data)
-          }
-        })
-window.addEventListener('DOMContentLoaded', init)
-//720 tall, 1280 wide
-  </script>-->
-  <style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-        user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-        overflow-x: none;
-  }
-  img{
-     -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-  }
-  .doomimg {
-    margin-bottom: 10px;
-    left: 25px;
-    top: 20px;
-    position: absolute;
-    width: 75px;
-    height: 75px;
-    border-radius: 15%;
-    background-color: lightblue;
-  }
-  .doomimg:hover {
-    background-color:#799b61;
-  }
-    .listimg {
-    margin-bottom: 10px;
-    right: 25px;
-    top: 30px;
-    position: absolute;
-    width: 40px;
-    height: 40px;
-transition: all .2s ease-in-out; }
-.listimg:hover { transform: scale(1.1); }
-  input{
-        position: absolute;
-    top: 20px;
-    left: 115px;
-    height: 75px;
-    width: 385px;
-    font-size: 3.5em;
-    border: none;
-    padding-left: 5px;
-    background-color: transparent;
-    user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-  }
-  input::-webkit-search-cancel-button{
-   display: none;
-}
-
-span{
-    content:" "; 
-    display: inline-block; 
-    width:25px;
-}
-  input:focus {
-    outline: 0;
-  }
-  .grid-container{
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: auto auto auto auto;
-  left: 10%;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  height: 75px;
-  /*height: 100px;*/
-  margin: 0;
-  /* bring your own prefixes */
-}
-.grid-container::-webkit-scrollbar {
-  display: none;
-}
-.grid-container div{
-    width: 330px;
-}
-.boogie::-webkit-scrollbar {
-  display: none;
-}
-h3{
-  display: inline-block;
-  margin-left: 10px;
-  width: 230px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.grid-container div {
-  display: inline-flex;
-  align-items: center;
-    height: 75px;
-}
-.grid-container div:hover {
-  background-color:#799b61;
-  color: white;
-  cursor: pointer;
-}
-h1{
-  left: 100px;
-}
-.hidden{
-display: none
-}
-  </style> 
-</head>
-<body>
-<a href="https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0"><img class="doomimg" src="https://cdn.shopify.com/s/files/1/0078/0225/7497/files/Mask_200x.png?v=1560288204"></a>
-  <img onclick="interview()" class="listimg" src="https://simpleicon.com/wp-content/uploads/list.png">
-            <input type="search" id="search" placeholder="search..." autofocus="autofocus">
-          <div style="overflow-y: scroll;   position: fixed;
-  top: 55%;
-  left: 50%;
-  height: 80%;
-  width: 80%;
-  transform: translate(-50%, -50%);" class="boogie hidden" id="boogie">
-<h1 style="top: 120px;">songs</h1>
-<div class="grid-container" style="top: 200px;">
-  <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-   <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
+             if (panel.style.maxHeight) {
+               plus.innerHTML = "+";
+               panel.style.maxHeight = null;
+             } else {
+               plus.innerHTML = "-";
+               panel.style.maxHeight = panel.scrollHeight + "px";
+             } 
+           });
+         }
+            }
+      </script>
+   </head>
+   <body>
+      <a href="https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0"><img class="doomimg" src="mask.webp"></a>
+      <div class="topnav">
+  <a id="projects">projects</a>
+  <a id="songs">songs</a>
+  <a id="interviews">interviews</a>
+  <a >extras</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
+  <input style="float: right;" type="search" id="search" placeholder="search..." tabindex="-1" autofocus="autofocus">
 </div>
-<h1 style="top: 280px;">albums</h1>
-<div class="grid-container" style="top: 360px;">
-  <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-   <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
+<div class="logo" id="logo"><!--add in update modal onclick-->
+   <img src="https://3dpk.co.uk/doom/Images/doomtranny.png">
 </div>
-<h1 style="top: 440px;">eps</h1>
-<div class="grid-container" style="top: 520px;">
-  <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-   <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-</div>
-<h1 style="top: 620px;">compilations</h1>
-<div class="grid-container" style="top: 680px;">
-  <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-   <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-</div>
-<h1 style="top: 740px;">leaks</h1>
-<div class="grid-container" style="top: 800px;">
-  <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-    <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-   <div style="padding: 0px !important; border: none;">
-    <img style="height: 75px; width: auto; display: inline-block;" src="https://s.starladder.com/uploads/user_logo/b/f/1/d/meta_tag_46ca3d1bdbae364bc02052776a93977a.jpg">
-    <h3>Title<br><span style="font-weight: lighter;">Name</span></h3>
-  </div>
-</div>
-</div>
-<div id="interview" class="hidden" style="overflow-y: scroll;   position: fixed;
-  top: 55%;
-  left: 50%;
-  height: 80%;
-  width: 80%;
-  transform: translate(-50%, -50%);">
-  <h1 style="text-align: center;">interview</h1>
-</div>
-<script>
-var input = document.getElementById("search");
-input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-   event.preventDefault();
-     $("div#boogie").removeClass("hidden");
-  }
-});
-</script>
-</body>
+      <div class="menu" id="projectlist">
+         <script>projectList();</script>
+      </div>
+      <div class='modal-background'>
+         <div class='modal-content' id='modal-content'></div>
+      </div>
+     <!-- <div class="version">v. 0.4</div>-->
+   </body>
 </html>
