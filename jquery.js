@@ -5,9 +5,16 @@ $(document).ready(function(){
          $(".modal-description").hide(); //neccisary?
          
          $("#projects").click(function(){
-          $("#logo").hide();
+          if ( $("#projectlist").is(':visible') ){
+        $("#logo").show();
+         $("#projectlist").hide();
+        $("#projects").css("color", "black");
+      }
+      else{
+           $("#logo").hide();
          $("#projectlist").show();
         $("#projects").css("color", "white");
+      }
          });
          
          $(".projectz").click(function(){
