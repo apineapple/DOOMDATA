@@ -8,30 +8,54 @@
       <script>
          var projectListCounter = 0;
          var projectClickCounter = 0;
-         const projects = [
-            "project title a",
-            "project title b",
-            "project title c",
-            "project title d",
-            "project title e",
-            "project title f"
+         var tracklistCounter = 0;
+         var tracklist;
+         var imgn = 0;
+         var projects = [
+            [["project title a"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]],
+            [["project title b"], ["track 1", "track 2", "track 3", "track 4"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]],
+            [["project title c"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]],
+            [["project title d"],  ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]],
+            [["project title e"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]],
+            [["project title f"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"]]
          ];
             function projectList(){
             while (projectListCounter != projects.length){
-               document.currentScript.insertAdjacentHTML("beforeBegin","<section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'>"+projects[projectListCounter]+"</section>");
+               document.currentScript.insertAdjacentHTML("beforeBegin","<section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'>"+projects[projectListCounter][0][0]+"</section>");
                projectListCounter++;
             }
          }
+
+         function left(){
+            if (projects[projectClickCounter][2][imgn-1] == null){imgn = projects[projectClickCounter][2].length-1;}
+            else {imgn=imgn-1;}
+
+            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][2][imgn]+"' class='img' />";
+            document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][3][imgn];
+         }
+         function right(){
+                      if (projects[projectClickCounter][2][imgn+1] == null){imgn = 0;}
+            else {imgn=imgn+1;}
+            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][2][imgn]+"' class='img' />";
+             document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][3][imgn];
+         }
+
             function projectModal(clicked_id){
                var projectId = document.getElementById(clicked_id).innerHTML;
-               while (projectId != projects[projectClickCounter]){
+               while (projectId != projects[projectClickCounter][0][0]){
                   projectClickCounter++;
                   if (projectClickCounter >= projects.length) {
-                     projectClickCounter = 0;
-                  }
-               }
+                     projectClickCounter = 0;}}
+                     //tracklist counter
+               while (tracklistCounter < projects[projectClickCounter][1].length){
+                  if (tracklistCounter == 0){
+                tracklist = (tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][1][tracklistCounter]+"</span><br>"; }
+             else{
+                tracklist =  tracklist+(tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][1][tracklistCounter]+"</span><br>";}
+               tracklistCounter++; }
 
-               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>1. track 1<br>2. track 2<br>3. track 3</p></div><button class='modal-item'>cover art<span class='modal-down'>+</span></button><div class='panel'><div class='cover'><button type='button' class='btn btn left'>&#10094;</button><img src='https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg' class='img' /><button  type='button' class='btn right'>&#10095;</button></div><p class='cover-text'>text</p></div><button class='modal-item'>videos<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><img class='spotify' src='listenicons/spotify.png'><img class='apple' src='listenicons/apple.png'><img class='cd' src='listenicons/cd.png'><img class='vinyl' src='listenicons/vinyl.png'><img class='soundcloud' src='listenicons/soundcloud.png'><img class='youtube' src='listenicons/youtube.png'><img class='deezer' src='listenicons/deezer.png'></div>";
+               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter][0][0]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>"+tracklist+"</p></div><button class='modal-item'>cover art<span class='modal-down'>+</span></button><div class='panel'><div class='cover'><button type='button' class='btn left' onclick='left()'>&#10094;</button><div id='imageSlideshow'><img src='"+projects[projectClickCounter][2][imgn]+"' class='img' /></div><button  type='button' class='btn right' onclick='right()'>&#10095;</button></div><p class='cover-text' id='imageCaption'>"+projects[projectClickCounter][3][imgn]+"</p></div><button class='modal-item'>videos<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><img class='spotify' src='listenicons/spotify.png'><img class='apple' src='listenicons/apple.png'><img class='cd' src='listenicons/cd.png'><img class='vinyl' src='listenicons/vinyl.png'><img class='soundcloud' src='listenicons/soundcloud.png'><img class='youtube' src='listenicons/youtube.png'><img class='deezer' src='listenicons/deezer.png'></div>";
+
                var acc = document.getElementsByClassName("modal-item");
                      var allplus = null;
                     var plus = null;
@@ -72,8 +96,14 @@ for (let j = 0; j < acc.length; j++) {
   <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
   <input style="float: right;" type="search" id="search" placeholder="search..." tabindex="-1" autofocus="autofocus">
 </div>
-<div class="logo" id="logo"><!--add in update modal onclick-->
-   <img src="https://3dpk.co.uk/doom/Images/doomtranny.png">
+<div class="logo" id="logo"><img src="https://3dpk.co.uk/doom/Images/doomtranny.png"></div>
+<div id="myModal" class="modalu">
+
+  <!-- Modal content -->
+  <div class="modalu-content reg-mode">
+    <p><b style="font-size: 18px;">new to version 0.5:</b><br>-working slideshow<br>-fixed spreadsheet<br>-array of arrays integrated<br>-version display added<br><br><b style="font-size: 18px;">up next:</b><br>-standardized listen icons<br>-changed general list<br>-project versions integrated<br>-finalize spreadsheet formatting</p>
+  </div>
+
 </div>
       <div class="menu" id="projectlist">
          <script>projectList();</script>
@@ -81,6 +111,26 @@ for (let j = 0; j < acc.length; j++) {
       <div class='modal-background'>
          <div class='modal-content' id='modal-content'></div>
       </div>
-     <!-- <div class="version">v. 0.4</div>-->
+     <!-- <div class="version">v. 0.5</div>-->
+     <script>
+                 var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("logo");
+
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+     </script>
    </body>
 </html>
