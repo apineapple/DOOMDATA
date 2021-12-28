@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="jquery.js"></script>
+      <link rel="stylesheet" href="style.css">
+      <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
+      <script>
+         var projectListCounter = 0;
+         var projectClickCounter = 0;
+         var tracklistCounter = 0;
+         var tracklist;
+         var imgn = 0;
+         var projects = [
+          [["project title"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+            [["MA_DOOM: Son of Yvonne"], ["album"], ["07/17/12"], ["produced it under the moniker DOOM The Metal Fingered Villain"], ["written by Masta Ace, 'scratched' by Dj Skizz, mixed by Richard 'Filthy Rich' Ahee and Masta Ace, executive produced by Richard 'Filthy Rich' Ahee, Masta Ace, and Robert 'Dj Rob' Alphonse, associate executive produced by Alfred 'Big Benn Klingon' Morgan, recorded at ProMixMaster Studios, NYC, released under M3 Records, and manufactured and distributed under Fat Beats Distribution. Art direction handled by Chimene 'C.C.' Campbell."], ["D Ski's Intro", "Ninteen Seventy Something", "Son of Yvonne", "Da'Pro", "Store Frontin'", "Me and My Gang", "Crush Hour", "Think I Am", "Fresh Fest", "Hoe-Tel Leftovers", "Slow Down", "Home Sweet Home", "Dedication", "I Did It", "In Da Spot", "Outtakes"], ["https://drive.google.com/uc?export=view&id=17UNY8y6Go4Bprj3NBNkD9Jh_X6TVPGN5", "https://drive.google.com/uc?export=view&id=1zHIEOfMDZYUPY-JPeIuUmBVGpNTTpbgA", "https://drive.google.com/uc?export=view&id=16sxOZ9DrhWTzA79QoHsImpH2oUGWgDb7", "https://drive.google.com/uc?export=view&id=1DJAyGdqRXwSPd3irKb2tlGGA9-FeB59k", "https://drive.google.com/uc?export=view&id=1hTF5G5FMtRVafW5tn5-mNjK3HY6iig9J", "https://drive.google.com/uc?export=view&id=11ZbJ8GUl79LaIqjzqUNujo8D-hrF68x6", "https://drive.google.com/uc?export=view&id=1Tg2KCiM3ztP2XbMlYwIUvKObzMUjGXiH", "https://drive.google.com/uc?export=view&id=1vmvlghuDwuBjHdECjdTkQ2doIkQjfn-1", "https://drive.google.com/uc?export=view&id=17enE0CtsXVX5ddjptvH6YWH4oxlGPuha", "https://drive.google.com/uc?export=view&id=1javBQS_XOrm22In0roSi1Cn8Bu4MChOH", "https://drive.google.com/uc?export=view&id=1U5DcmrnrD4Bj9O4bjQ69S2J58lGSQOTg", "https://drive.google.com/uc?export=view&id=1QN0NcvMxutMYfow69Ybj28ZLliGTxqqU"], ["Cover Art", "CD Cover Art", "CD Cover Art 2", "CD in Casing", "CD Middle Image", "CD Middle Image 2", "CD Middle Image 3", "CD Middle Image 4", "CD Middle Image 5", "CD Back Cover", "CD Back Cover 2", "Vinyl Back Cover"],[],[], ["Images not complete, track 15 missing in some versions"]],
+            [["project title b"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3", "track 4"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+            [["project title c"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]]
+         ];
+            function projectList(){
+            while (projectListCounter != projects.length){
+               document.currentScript.insertAdjacentHTML("beforeBegin","<section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'>"+projects[projectListCounter][0][0]+"</section>");
+               projectListCounter++;
+            }
+         }
+         
+         function left(){
+            if (projects[projectClickCounter][6][imgn-1] == null){imgn = projects[projectClickCounter][6].length-1;}
+            else {imgn=imgn-1;}
+         
+            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][6][imgn]+"' class='img' />";
+            document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][7][imgn];
+         }
+         function right(){
+                      if (projects[projectClickCounter][6][imgn+1] == null){imgn = 0;}
+            else {imgn=imgn+1;}
+            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][6][imgn]+"' class='img' />";
+             document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][7][imgn];
+         }
+         
+            function projectModal(clicked_id){
+               var projectId = document.getElementById(clicked_id).innerHTML;
+               while (projectId != projects[projectClickCounter][0][0]){
+                  projectClickCounter++;
+                  if (projectClickCounter >= projects.length) {
+                     projectClickCounter = 0;}}
+                     tracklistCounter = 0;
+               while (tracklistCounter < projects[projectClickCounter][5].length){
+                  if (tracklistCounter == 0){
+                tracklist = "0"+(tracklistCounter+1)+". "+"<span class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>"; }
+                else if (9>tracklistCounter>0){
+                  tracklist =  tracklist+" 0"+(tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
+             else{
+                tracklist =  tracklist+(tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
+               tracklistCounter++; }
+               var vowel;
+               var vowelIndex = "^[aieouAIEOU].*";
+               if (projects[projectClickCounter][1][0].charAt(0).match(vowelIndex)){vowel = "an";}
+               else { vowel = "a";}
+         
+               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter][0][0]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p><b>"+projects[projectClickCounter][0][0]+"</b> is "+vowel+" "+projects[projectClickCounter][1][0]+" that released on "+projects[projectClickCounter][2][0]+". DOOM "+projects[projectClickCounter][3][0]+". The project was "+projects[projectClickCounter][4][0]+"</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>"+tracklist+"</p></div><button class='modal-item'>images<span class='modal-down'>+</span></button><div class='panel'><div class='cover'><button type='button' class='btn left' onclick='left()'>&#10094;</button><div id='imageSlideshow'><img src='"+projects[projectClickCounter][6][imgn]+"' class='img' /></div><button  type='button' class='btn right' onclick='right()'>&#10095;</button></div><p class='cover-text' id='imageCaption'>"+projects[projectClickCounter][7][imgn]+"</p></div><button class='modal-item'>attached media<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>"+projects[projectClickCounter][10][imgn]+"</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><img class='spotify' src='listenicons/spotify.png'><img class='apple' src='listenicons/apple.png'><img class='cd' src='listenicons/cd.png'><img class='vinyl' src='listenicons/vinyl.png'><img class='soundcloud' src='listenicons/soundcloud.png'><img class='youtube' src='listenicons/youtube.png'><img class='deezer' src='listenicons/deezer.png'></div>";
+         
+               var acc = document.getElementsByClassName("modal-item");
+                     var allplus = null;
+                    var plus = null;
+         for (i = 0; i < acc.length; i++) {
+           acc[i].addEventListener("click", function() {
+         
+         for (let j = 0; j < acc.length; j++) {
+         if(j!=i){     
+             acc[j].classList.remove("active");
+         acc[j].nextElementSibling.style.maxHeight = null;
+         allplus = acc[j].querySelector('.modal-down');
+         allplus.innerHTML = "+";
+         }
+         }
+             this.classList.toggle("active");
+             var panel = this.nextElementSibling;
+            plus = this.querySelector('.modal-down');
+         
+             if (panel.style.maxHeight) {
+               plus.innerHTML = "+";
+               panel.style.maxHeight = null;
+             } else {
+               plus.innerHTML = "-";
+               panel.style.maxHeight = panel.scrollHeight + "px";
+             } 
+           });
+         }
+            }
+      </script>
+   </head>
+   <body>
+      <a href="https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0"><img class="doomimg" src="mask.webp"></a>
+      <div class="topnav">
+         <a id="projects">projects</a>
+         <a id="songs">songs</a>
+         <a id="interviews">interviews</a>
+         <a >extras</a>
+         <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
+         <input style="float: right;" type="search" id="search" placeholder="search..." tabindex="-1" autofocus="autofocus">
+      </div>
+      <div class="logo" id="logo"><img src="https://3dpk.co.uk/doom/Images/doomtranny.png"></div>
+      <div id="myModal" class="modalu">
+         <!-- Modal content -->
+         <div class="modalu-content">
+            <p><b style="font-size: 18px;">added in version 0.6:</b><br>-working slideshow<br>-fixed spreadsheet<br>-array of arrays integrated<br>-version display added<br><br><b style="font-size: 18px;">coming in version 0.7:</b><br>-finalized description loops<br>-tweaked css features<br>-google media archive<br>-finalized spreadsheet formatting<br><br><b style="font-size: 18px;">more:</b><br>-list icons toggle added<br>-project versions integrated<br>-changed general list (and scroll area)<br>-formatted mobile version</p>
+         </div>
+      </div>
+      <div class="menu" id="projectlist">
+         <script>projectList();</script>
+      </div>
+      <div class='modal-background'>
+         <div class='modal-content' id='modal-content'></div>
+      </div>
+      <!-- <div class="version">v. 0.5</div>-->
+      <script>
+         var modal = document.getElementById("myModal");
+         var btn = document.getElementById("logo");
+         btn.onclick = function() {
+         modal.style.display = "block";
+         }
+         window.onclick = function(event) {
+         if (event.target == modal) {
+         modal.style.display = "none";
+         }
+         }
+      </script>
+   </body>
+</html>
