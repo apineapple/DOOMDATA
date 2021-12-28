@@ -3,6 +3,7 @@ function initialize()
 $(document).ready(function(){
          $("#projectlist").hide();
          $(".modal-description").hide(); //neccisary?
+         $("#allpatch").hide();
          
          $("#projects").click(function(){
           if ( $("#projectlist").is(':visible') ){
