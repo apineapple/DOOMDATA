@@ -7,22 +7,73 @@
       <link rel="stylesheet" href="style.css">
       <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
       <script>
+         var projectlistcontents;
          var projectListCounter = 0;
+         var projectListCounterb = 1;
+         var projectListCounterc = 2;
+         var projectListCounterd = 3;
          var projectClickCounter = 0;
          var tracklistCounter = 0;
          var tracklist;
          var imgn = 0;
          var projects = [
-          [["project title"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+          [["project title"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+          [["project titleb"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+          [["project titlec"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
             [["MA_DOOM: Son of Yvonne"], ["album"], ["07/17/12"], ["produced it under the moniker DOOM The Metal Fingered Villain"], ["written by Masta Ace, 'scratched' by Dj Skizz, mixed by Richard 'Filthy Rich' Ahee and Masta Ace, executive produced by Richard 'Filthy Rich' Ahee, Masta Ace, and Robert 'Dj Rob' Alphonse, associate executive produced by Alfred 'Big Benn Klingon' Morgan, recorded at ProMixMaster Studios, NYC, released under M3 Records, and manufactured and distributed under Fat Beats Distribution. Art direction handled by Chimene 'C.C.' Campbell."], ["D Ski's Intro", "Ninteen Seventy Something", "Son of Yvonne", "Da'Pro", "Store Frontin'", "Me and My Gang", "Crush Hour", "Think I Am", "Fresh Fest", "Hoe-Tel Leftovers", "Slow Down", "Home Sweet Home", "Dedication", "I Did It", "In Da Spot", "Outtakes"], ["https://drive.google.com/uc?export=view&id=17UNY8y6Go4Bprj3NBNkD9Jh_X6TVPGN5", "https://drive.google.com/uc?export=view&id=1zHIEOfMDZYUPY-JPeIuUmBVGpNTTpbgA", "https://drive.google.com/uc?export=view&id=16sxOZ9DrhWTzA79QoHsImpH2oUGWgDb7", "https://drive.google.com/uc?export=view&id=1DJAyGdqRXwSPd3irKb2tlGGA9-FeB59k", "https://drive.google.com/uc?export=view&id=1hTF5G5FMtRVafW5tn5-mNjK3HY6iig9J", "https://drive.google.com/uc?export=view&id=11ZbJ8GUl79LaIqjzqUNujo8D-hrF68x6", "https://drive.google.com/uc?export=view&id=1Tg2KCiM3ztP2XbMlYwIUvKObzMUjGXiH", "https://drive.google.com/uc?export=view&id=1vmvlghuDwuBjHdECjdTkQ2doIkQjfn-1", "https://drive.google.com/uc?export=view&id=17enE0CtsXVX5ddjptvH6YWH4oxlGPuha", "https://drive.google.com/uc?export=view&id=1javBQS_XOrm22In0roSi1Cn8Bu4MChOH", "https://drive.google.com/uc?export=view&id=1U5DcmrnrD4Bj9O4bjQ69S2J58lGSQOTg", "https://drive.google.com/uc?export=view&id=1QN0NcvMxutMYfow69Ybj28ZLliGTxqqU"], ["Cover Art", "CD Cover Art", "CD Cover Art 2", "CD in Casing", "CD Middle Image", "CD Middle Image 2", "CD Middle Image 3", "CD Middle Image 4", "CD Middle Image 5", "CD Back Cover", "CD Back Cover 2", "Vinyl Back Cover"],[],[], ["Images not complete, track 15 missing in some versions"]],
             [["project title b"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3", "track 4"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
+            [["project title c"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
             [["project title c"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]]
          ];
             function projectList(){
-            while (projectListCounter != projects.length){
-               document.currentScript.insertAdjacentHTML("beforeBegin","<section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'>"+projects[projectListCounter][0][0]+"</section>");
-               projectListCounter++;
+             while (projectListCounter < projects.length) {
+            console.log(projectListCounter);
+         
+         
+         if (projectListCounterd < projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc < projects.length) { //all rows except the last one        
+          if (projectlistcontents == null){
+          projectlistcontents = "<div class='grid-containera'><div class='grid-item' style='margin-right:70px; margin-top: 10px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px; margin-top: 10px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item' style='margin-top: 10px;'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+         }
+         else{
+             projectlistcontents = projectlistcontents+"<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+         }}
+         
+         
+         else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc < projects.length){ //the last row if it has 3 images
+                
+            if(projectlistcontents == null){
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+             }
+            else{
+               projectlistcontents = projectlistcontents + "<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+            }}
+         
+           else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc >= projects.length){ //the last row if it has 3 images
+                
+            if(projectlistcontents == null){
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
             }
+            else{
+               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
+            }}
+         
+         
+            else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb >= projects.length && projectListCounterc >= projects.length){ //the last row if it has 3 images
+                
+            if(projectlistcontents == null){
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
+            }
+            else{
+               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
+            }}
+         
+         projectListCounter = projectListCounter+3;
+         projectListCounterb= projectListCounterb+3;
+         projectListCounterc= projectListCounterc+3;
+         projectListCounterd= projectListCounterd+3;
+         
+         }
+         document.getElementById('projectlist').innerHTML = projectlistcontents;
          }
          
          function left(){
@@ -40,9 +91,9 @@
          }
          
             function projectModal(clicked_id){
-               var projectId = document.getElementById(clicked_id).innerHTML;
+               var projectId = document.getElementById(clicked_id).childNodes[1].innerHTML;
                while (projectId != projects[projectClickCounter][0][0]){
-                  projectClickCounter++;
+                  projectClickCounter++;// the problem
                   if (projectClickCounter >= projects.length) {
                      projectClickCounter = 0;}}
                      tracklistCounter = 0;
@@ -105,10 +156,17 @@
       <div id="myModal" class="modalu">
          <!-- Modal content -->
          <div class="modalu-content">
-            <p><b style="font-size: 18px;">added in version 0.6:</b><br>-working slideshow<br>-fixed spreadsheet<br>-array of arrays integrated<br>-version display added<br><br><b style="font-size: 18px;">coming in version 0.7:</b><br>-finalized description loops<br>-tweaked css features<br>-google media archive<br>-finalized spreadsheet formatting<br><br><b style="font-size: 18px;">more:</b><br>-list icons toggle added<br>-project versions integrated<br>-changed general list (and scroll area)<br>-formatted mobile version</p>
+            <p><b style="font-size: 18px;">overview:</b><br>This is a comprehensive database of all work that DOOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.<br><br><b style="font-size: 18px;">coming soon:</b><br>-filtered search<br>-finalized descriptios<br>-spreadsheet formatting fixed<br>-list icons toggle added<br>-project versions integrated<br>-formatted mobile version<br>-itemized scroll</p>
          </div>
       </div>
-      <div class="menu" id="projectlist">
+      <div class="menu" id="projectlist" style="position: fixed;
+         left: 50%;
+         top:50%;
+         /* bring your own prefixes */
+         transform: translate(-50%, -50%); overflow-y: scroll; height: 445px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll;
+         /*scroll-snap-points-y: repeat(435px);
+         scroll-snap-type: y mandatory;
+         scroll-behavior: auto;*/">
          <script>projectList();</script>
       </div>
       <div class='modal-background'>
