@@ -67,7 +67,7 @@ display: none;
 .menu::-webkit-scrollbar{
 display: none;
 }
-.menu{
+/*.menu{
 font-size: 32pt;
 transition: all .2s ease-in-out; 
 -ms-overflow-style: none;
@@ -87,10 +87,28 @@ height: 50px;
 width: auto;
 padding-left: 10px;
 padding-right: 10px;
+}*/
+.grid-item {position: relative; background-color: lightblue; padding-top: 20px; height: 405px !important; max-height: 405px; padding-left: 20px; padding-right: 20px; border-radius: 5px;}
+.grid-item {transition: all .2s ease-in-out;}
+.grid-item:hover {transform: scale(1.025);}
+.grid-containera { scroll-snap-align: start; display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 25px;}
+.grid-containerb {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 10px;}
+.menu img{
+  vertical-align: middle;
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
 }
-.menu section:hover{
- transform: scale(1.025);
- color: lightblue;
+.menu h2{
+  margin-left: 15px;
+  /*margin-top: 10px;*/
+  font-size: 18pt;
+  margin-top: 25px;
+  max-width: 270px !important;
+  width: 270px;
+  word-wrap: break-word !important; 
+  overflow: hidden;
+  max-height: 52px;
 }
 section{
 scroll-snap-align: start;
@@ -354,6 +372,7 @@ color: white;
   margin: auto;
   padding: 20px;
   width: auto;
+  max-width: 300px;
     position: fixed;
   top: 50%;
   left: 50%;
