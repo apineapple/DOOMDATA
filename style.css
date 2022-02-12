@@ -90,8 +90,8 @@ padding-right: 10px;
 }*/
 .grid-item {position: relative; background-color: lightblue; padding-top: 20px; height: 405px !important; max-height: 405px; padding-left: 20px; padding-right: 20px; border-radius: 5px;}
 .grid-item {transition: all .2s ease-in-out;}
-.grid-item:hover {transform: scale(1.025);}
-.grid-containera { scroll-snap-align: start; display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 25px;}
+.grid-item:hover {transform: scale(.95); color: white;}
+.grid-containera {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 25px;}
 .grid-containerb {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 10px;}
 .menu img{
   vertical-align: middle;
@@ -102,7 +102,7 @@ padding-right: 10px;
 .menu h2{
   margin-left: 15px;
   /*margin-top: 10px;*/
-  font-size: 18pt;
+  font-size: 16pt;
   margin-top: 25px;
   max-width: 270px !important;
   width: 270px;
@@ -203,7 +203,7 @@ max-height: 0;
 overflow: hidden;
 transition: max-height 0.2s ease-out;
 border-bottom: 5px solid #000;
-font-family: 'IBM Plex Mono';
+font-family: 'Helvetica Bold', sans-serif;
 }
 .topnav {
   background-color: lightblue;
@@ -233,7 +233,8 @@ text-transform: uppercase;
 }
 
 .topnav a:hover {
-  transform: scale(1.1);
+  transform: scale(.95);
+  color: white;
 }
 *, *::after, *::before {
   -webkit-user-select: none;
@@ -242,57 +243,17 @@ text-transform: uppercase;
   cursor: default;
 }
 .listen{
-  display: flex;
-  justify-content: center;
+  text-align: center;
+text-transform: uppercase;
+font-weight: bold;
 }
-.listen img{
-  padding-top: 15px;
-padding-bottom: 10px;
-padding-left: 5px;
-padding-right: 5px;
+.listen p span::before{
+    content: "\a";
+    white-space: pre;
+}
+.listen section{
 transition: all .2s ease-in-out;
-}
-.listen img:hover{
-  transform: scale(1.25);
-  filter: invert(100%);
-}
-.spotify{
-width: 26px;
-height: 26px;
-opacity: .2;
-}
-.apple{
-width: 30px;
-height: 30px;
-margin-top: -4px;
-}
-.cd{
-width: 27px;
-height: 27px;
-margin-top: 0px;
-}
-.vinyl{
-  width: 32px;
-height: 32px;
-margin-top: -3px;
-}
-.soundcloud{
-  width: 35px;
-height: 50px;
-margin-top: -10px;
-margin-bottom: -30px;
-}
-.youtube{
-   width: 40px;
-height: 40px;
-margin-top: -7px;
-margin-bottom: -30px; 
-}
-.deezer{
-  width: 35px;
-height: 40px;
-margin-top: -10px;
-margin-bottom: -30px;
+display: inline-block;
 }
 .logo{
   position: absolute;
@@ -381,4 +342,10 @@ color: white;
   border-radius: 5px;
   max-height: 70%;
     padding: 50px;
+}
+.listen a:hover{
+  color: white;
+}
+.listen span:hover{
+  color: white;
 }
