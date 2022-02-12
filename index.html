@@ -3,8 +3,8 @@
    <head>
       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="fulljquery.js"></script>
       <script src="jquery.js"></script>
+      <script src="fulljquery.js"></script>
       <link rel="stylesheet" href="style.css">
       <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
       <script>
@@ -14,58 +14,100 @@
          var projectListCounterc = 2;
          var projectListCounterd = 3;
          var projectClickCounter = 0;
+         var projectversion = 0;
+         var totalversions = 0;
+         var pversionmatch = 0;
+         var pversionlist = "josh";
+         var projectId = "";
+         var songlistcontents;
+         var songListCounter = 0;
+         var songListCounterb = 1;
+         var songListCounterc = 2;
+         var songListCounterd = 3;
+         var songClickCounter = 0;
          var tracklistCounter = 0;
          var tracklist;
-         var imgn = 0;
+         var songmatcha = 0;
+         var songmatchb = 0;
+         var songmatchc = 0;
+         var songId = "";
+         var pimgn = 0;
+         var pvimgn = 0;
+         var simgn = 0;
          var projects = [
-          [["project title"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
-          [["project titleb"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
-          [["project titlec"], ["project type"], ["date"], ["DOOM roles"], ["other credits"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
-            [["MA_DOOM: Son of Yvonne"], ["album"], ["07/17/12"], ["produced it under the moniker DOOM The Metal Fingered Villain"], ["written by Masta Ace, 'scratched' by Dj Skizz, mixed by Richard 'Filthy Rich' Ahee and Masta Ace, executive produced by Richard 'Filthy Rich' Ahee, Masta Ace, and Robert 'Dj Rob' Alphonse, associate executive produced by Alfred 'Big Benn Klingon' Morgan, recorded at ProMixMaster Studios, NYC, released under M3 Records, and manufactured and distributed under Fat Beats Distribution. Art direction handled by Chimene 'C.C.' Campbell."], ["D Ski's Intro", "Ninteen Seventy Something", "Son of Yvonne", "Da'Pro", "Store Frontin'", "Me and My Gang", "Crush Hour", "Think I Am", "Fresh Fest", "Hoe-Tel Leftovers", "Slow Down", "Home Sweet Home", "Dedication", "I Did It", "In Da Spot", "Outtakes"], ["https://drive.google.com/uc?export=view&id=17UNY8y6Go4Bprj3NBNkD9Jh_X6TVPGN5", "https://drive.google.com/uc?export=view&id=1zHIEOfMDZYUPY-JPeIuUmBVGpNTTpbgA", "https://drive.google.com/uc?export=view&id=16sxOZ9DrhWTzA79QoHsImpH2oUGWgDb7", "https://drive.google.com/uc?export=view&id=1DJAyGdqRXwSPd3irKb2tlGGA9-FeB59k", "https://drive.google.com/uc?export=view&id=1hTF5G5FMtRVafW5tn5-mNjK3HY6iig9J", "https://drive.google.com/uc?export=view&id=11ZbJ8GUl79LaIqjzqUNujo8D-hrF68x6", "https://drive.google.com/uc?export=view&id=1Tg2KCiM3ztP2XbMlYwIUvKObzMUjGXiH", "https://drive.google.com/uc?export=view&id=1vmvlghuDwuBjHdECjdTkQ2doIkQjfn-1", "https://drive.google.com/uc?export=view&id=17enE0CtsXVX5ddjptvH6YWH4oxlGPuha", "https://drive.google.com/uc?export=view&id=1javBQS_XOrm22In0roSi1Cn8Bu4MChOH", "https://drive.google.com/uc?export=view&id=1U5DcmrnrD4Bj9O4bjQ69S2J58lGSQOTg", "https://drive.google.com/uc?export=view&id=1QN0NcvMxutMYfow69Ybj28ZLliGTxqqU"], ["Cover Art", "CD Cover Art", "CD Cover Art 2", "CD in Casing", "CD Middle Image", "CD Middle Image 2", "CD Middle Image 3", "CD Middle Image 4", "CD Middle Image 5", "CD Back Cover", "CD Back Cover 2", "Vinyl Back Cover"],[],[], ["Images not complete, track 15 missing in some versions"]],
-            [["project title b"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3", "track 4"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
-            [["project title c"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]],
-            [["project title c"], ["album"], ["9/13/03"], ["produced and smoduced the project under the moniker funky man"], ["mixed by dj subroc"], ["track 1", "track 2", "track 3"], ["https://alfalfastudio.s3.amazonaws.com/wp-content/uploads/2015/10/02230113/Operation_Doomsday_crop-1.jpg", "https://img.discogs.com/NrxiLjRbWn6KgI9xvGI_K8a9ZYQ=/fit-in/600x600/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-190819-1612228543-8413.jpeg.jpg"], ["caption 1", "caption 2"],[],[], ["notes"]]
+            [["MA_DOOM: Son of Yvonne"],  ["album"],  ["07/17/12"],  ["produced it under the moniker DOOM The Metal Fingered Villain"],   ["written by Masta Ace, 'scratched' by Dj Skizz, mixed by Richard 'Filthy Rich' Ahee and Masta Ace, executive produced by Richard 'Filthy Rich' Ahee, Masta Ace, and Robert 'Dj Rob' Alphonse, associate executive produced by Alfred 'Big Benn Klingon' Morgan, with art direction handled by Chimene 'C.C.' Campbell.", "Recorded at ProMixMaster Studios, NYC, released under M3 Records, and manufactured and distributed under Fat Beats Distribution."], ["D Ski's Intro", "Ninteen Seventy Something", "Son of Yvonne", "Da'Pro", "Store Frontin'", "Me and My Gang", "Crush Hour", "Think I Am", "Fresh Fest", "Hoe-Tel Leftovers", "Slow Down", "Home Sweet Home", "Dedication", "I Did It", "In Da Spot", "Outtakes"],    [],   ["https://drive.google.com/uc?export=view&id=17UNY8y6Go4Bprj3NBNkD9Jh_X6TVPGN5", "https://drive.google.com/uc?export=view&id=1zHIEOfMDZYUPY-JPeIuUmBVGpNTTpbgA", "https://drive.google.com/uc?export=view&id=16sxOZ9DrhWTzA79QoHsImpH2oUGWgDb7", "https://drive.google.com/uc?export=view&id=1DJAyGdqRXwSPd3irKb2tlGGA9-FeB59k", "https://drive.google.com/uc?export=view&id=1hTF5G5FMtRVafW5tn5-mNjK3HY6iig9J", "https://drive.google.com/uc?export=view&id=11ZbJ8GUl79LaIqjzqUNujo8D-hrF68x6", "https://drive.google.com/uc?export=view&id=1Tg2KCiM3ztP2XbMlYwIUvKObzMUjGXiH", "https://drive.google.com/uc?export=view&id=1vmvlghuDwuBjHdECjdTkQ2doIkQjfn-1", "https://drive.google.com/uc?export=view&id=17enE0CtsXVX5ddjptvH6YWH4oxlGPuha", "https://drive.google.com/uc?export=view&id=1javBQS_XOrm22In0roSi1Cn8Bu4MChOH", "https://drive.google.com/uc?export=view&id=1U5DcmrnrD4Bj9O4bjQ69S2J58lGSQOTg", "https://drive.google.com/uc?export=view&id=1QN0NcvMxutMYfow69Ybj28ZLliGTxqqU"],  ["Cover Art", "CD Cover Art", "CD Cover Art 2", "CD in Casing", "CD Middle Image", "CD Middle Image 2", "CD Middle Image 3", "CD Middle Image 4", "CD Middle Image 5", "CD Back Cover", "CD Back Cover 2", "Vinyl Back Cover"],  [],   [],   ["Images not complete, track 15 missing in some versions"], ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], []],
+[["Madvillainy"], ["collaborative album"],   ["03/23/04"],  [],   [],   ["The Illest Villains", "Accordion", "Meat Grinder", "Bistro", "Raid", "America's Most Blunted", "Sickfit", "Rainbows", "Curls", "Do Not Fire!", "Money Folder", "Shadows of Tomorrow", "Operation Lifesaver aka Mint Test", "Figaro", "Hardcore Hustle", "Strange Ways", "Fancy Clown", "Eye", "Supervillain Theme", "All Caps", "Great Day", "Rhinestone Cowboy"],    [],   ["https://drive.google.com/uc?export=view&id=16aoFqc4owvJYRu-Aph52UqD7NIau8wry"],   ["Cover Art"], [],   [],   [],   ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], []],
+[["MM..FOOD"], ["album"],  ["11/16/04"],  [],   [],   ["Beef Rap", "Hoe Cakes", "Potholderz", "One Beer", "Deep Fried Frenz", "Poo-Putt Platter", "Fillet-O-Rapper", "Gumbo", "Fig Leaf Bi-Carbonate","Kon Karne", "Guinnesses", "Kon Queso", "Rap Snitch Knishes", "Vomitspit", "Kookies"], [],   ["https://drive.google.com/uc?export=view&id=1J2dBv-iQPyIZQbhXOwfJ656iA69TMtLb"],   ["Cover Art"], [],   [],   [],   ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], []],
+[["Operation: Doomsday"],  ["album"],  ["10/19/99"],  [],   [],   ["The Time We Faced Doom", "Doomsday", "Rhymes Like Dimes", "The Finest", "Back in the Days", "Go with the Flow", "Tick, Tick...", "Red and Gold", "The Hands of Doom", "Who You Think I Am?", "Doom, Are You Awake?", "Hey!", "Operation: Greenbacks", "The Mic", "The Mystery of Doom", "Dead Bent", "Gas Drawls", "?", "Hero v.s. Villain"], [],   ["https://drive.google.com/uc?export=view&id=114TsRQMswAGB9JLjETNVNW2louXVZKsV"],   ["Cover Art"], [],   [],   [],   ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], []],
+[["BORN LIKE THIS"], ["album"],  ["03/24/09"],  [],   [],   ["SUPERVILLAIN (INTRO)", "GAZZILLION EAR", "BALLSKIN", "YESSIR", "ABSOLUTELY", "RAP AMBUSH", "LIGHTWORKS", "BATTY BOYZ", "ANGELZ", "CELLZ", "STILL DOPE", "MICROWAVE MAYO", "MORE RHYMIN", "THAT'S THAT", "SUPERVILLAINZ", "BUMPY'S MESSAGE", "THANK YA"],  [],   ["https://drive.google.com/uc?export=view&id=1VoPGW_qZPXk1egGiDbAbtwyjd-5Aqp1h"],   ["Cover Art"], [],   [],   [],   ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], []],
+[["BORN LIKE THIS (deluxe edition)"], ["album"],  ["03/24/09"],  [],   [],   ["SUPERVILLAIN (INTRO)", "GAZZILLION EAR", "BALLSKIN", "YESSIR", "ABSOLUTELY", "RAP AMBUSH", "LIGHTWORKS", "BATTY BOYZ", "ANGELZ", "CELLZ", "STILL DOPE", "MICROWAVE MAYO", "MORE RHYMIN", "THAT'S THAT", "SUPERVILLAINZ", "BUMPY'S MESSAGE", "THANK YA"],  [],   ["https://drive.google.com/uc?export=view&id=1VoPGW_qZPXk1egGiDbAbtwyjd-5Aqp1h"],   ["Cover Art"], [],   [],   [],   ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"], ["BORN LIKE THIS"]],
          ];
+
+    while (projectversion < projects.length){
+            if (typeof projects[projectversion][13][0] !== 'undefined'){
+               totalversions++;
+            }
+            projectversion++;
+         }
+pversionmatch = (projects.length-totalversions);
+
+
+         var songs = [
+            [["D Ski's Intro"],  ["07/17/12"],  ["produced it under the moniker DOOM The Metal Fingered Villain"],  ["written by Masta Ace, 'scratched' by Dj Skizz, mixed by Richard 'Filthy Rich' Ahee and Masta Ace, executive produced by Richard 'Filthy Rich' Ahee, Masta Ace, and Robert 'Dj Rob' Alphonse, associate executive produced by Alfred 'Big Benn Klingon' Morgan, with art direction handled by Chimene 'C.C.' Campbell.", "Recorded at ProMixMaster Studios, NYC, released under M3 Records, and manufactured and distributed under Fat Beats Distribution."], ["song length"], ["https://drive.google.com/uc?export=view&id=17UNY8y6Go4Bprj3NBNkD9Jh_X6TVPGN5", "https://drive.google.com/uc?export=view&id=1zHIEOfMDZYUPY-JPeIuUmBVGpNTTpbgA", "https://drive.google.com/uc?export=view&id=16sxOZ9DrhWTzA79QoHsImpH2oUGWgDb7", "https://drive.google.com/uc?export=view&id=1DJAyGdqRXwSPd3irKb2tlGGA9-FeB59k", "https://drive.google.com/uc?export=view&id=1hTF5G5FMtRVafW5tn5-mNjK3HY6iig9J", "https://drive.google.com/uc?export=view&id=11ZbJ8GUl79LaIqjzqUNujo8D-hrF68x6", "https://drive.google.com/uc?export=view&id=1Tg2KCiM3ztP2XbMlYwIUvKObzMUjGXiH", "https://drive.google.com/uc?export=view&id=1vmvlghuDwuBjHdECjdTkQ2doIkQjfn-1", "https://drive.google.com/uc?export=view&id=17enE0CtsXVX5ddjptvH6YWH4oxlGPuha", "https://drive.google.com/uc?export=view&id=1javBQS_XOrm22In0roSi1Cn8Bu4MChOH", "https://drive.google.com/uc?export=view&id=1U5DcmrnrD4Bj9O4bjQ69S2J58lGSQOTg", "https://drive.google.com/uc?export=view&id=1QN0NcvMxutMYfow69Ybj28ZLliGTxqqU"],  ["Cover Art", "CD Cover Art", "CD Cover Art 2", "CD in Casing", "CD Middle Image", "CD Middle Image 2", "CD Middle Image 3", "CD Middle Image 4", "CD Middle Image 5", "CD Back Cover", "CD Back Cover 2", "Vinyl Back Cover"],  [],   [],   ["Images not complete, track 15 missing in some versions"], ["spotify", "cd", "apple", "deezer", "vinyl", "soundcloud", "cassette", "digital"]]
+         ];
+
+    while (songmatcha < songs.length){
+            songmatchb = 0;
+            while (songmatchb < projects.length){
+                  songmatchc = 0;
+               while (songmatchc < projects[songmatchb][5].length){
+                     if (songs[songmatcha][0][0] == projects[songmatchb][5][songmatchc]){
+                     projects[songmatchb][5][songmatchc] =  "<span class='songz' id='berry"+songmatcha+songmatchb+songmatchc+"' onclick='songModal(this.id)'>"+projects[songmatchb][5][songmatchc]+"</span>"//this line right here
+                     }
+                  songmatchc++;
+               }
+               songmatchb++;
+            }
+            songmatcha++;
+         }
+
             function projectList(){
-             while (projectListCounter < projects.length) {
-            console.log(projectListCounter);
-         
-         
-         if (projectListCounterd < projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc < projects.length) { //all rows except the last one        
+             while (projectListCounter < (projects.length-totalversions)) {
+         if (projectListCounterd < (projects.length-totalversions) && projectListCounter < (projects.length-totalversions) && projectListCounterb < (projects.length-totalversions) && projectListCounterc < (projects.length-totalversions)) { //all rows except the last one        
           if (projectlistcontents == null){
-          projectlistcontents = "<div class='grid-containera'><div class='grid-item' style='margin-right:70px; margin-top: 10px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px; margin-top: 10px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item' style='margin-top: 10px;'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+          projectlistcontents = "<div class='grid-containera'><div class='grid-item' style='margin-right:70px; margin-top: 10px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px; margin-top: 10px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item' style='margin-top: 10px;'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][7][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
          }
          else{
-             projectlistcontents = projectlistcontents+"<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+             projectlistcontents = projectlistcontents+"<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][7][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
          }}
          
          
-         else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc < projects.length){ //the last row if it has 3 images
+         else if (projectListCounterd >= (projects.length-totalversions) && projectListCounter < (projects.length-totalversions) && projectListCounterb < (projects.length-totalversions) && projectListCounterc < (projects.length-totalversions)){ //the last row if it has 3 images
                 
             if(projectlistcontents == null){
-                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][7][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
              }
             else{
-               projectlistcontents = projectlistcontents + "<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][6][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
+               projectlistcontents = projectlistcontents + "<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='project"+projectListCounterc+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterc][7][0]+"'><h2>"+projects[projectListCounterc][0][0]+"</h2></section></div></div>";
             }}
          
-           else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb < projects.length && projectListCounterc >= projects.length){ //the last row if it has 3 images
+           else if (projectListCounterd >= (projects.length-totalversions) && projectListCounter < (projects.length-totalversions) && projectListCounterb < (projects.length-totalversions) && projectListCounterc >= (projects.length-totalversions)){ //the last row if it has 3 images
                 
             if(projectlistcontents == null){
-                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
             }
             else{
-               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][6][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
+               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='project"+projectListCounterb+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounterb][7][0]+"'><h2>"+projects[projectListCounterb][0][0]+"</h2></section></div></div>";
             }}
          
          
-            else if (projectListCounterd >= projects.length && projectListCounter < projects.length && projectListCounterb >= projects.length && projectListCounterc >= projects.length){ //the last row if it has 3 images
+            else if (projectListCounterd >= (projects.length-totalversions) && projectListCounter < (projects.length-totalversions) && projectListCounterb >= (projects.length-totalversions) && projectListCounterc >= (projects.length-totalversions)){ //the last row if it has 3 images
                 
             if(projectlistcontents == null){
-                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
+                projectlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
             }
             else{
-               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][6][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
+               projectlistcontents = projectlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='project"+projectListCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[projectListCounter][7][0]+"'><h2>"+projects[projectListCounter][0][0]+"</h2></section></div></div>";
             }}
          
          projectListCounter = projectListCounter+3;
@@ -76,42 +118,124 @@
          }
          document.getElementById('projectlist').innerHTML = projectlistcontents;
          }
+
+          function songList(){
+             while (songListCounter < songs.length) {
          
-         function left(){
-            if (projects[projectClickCounter][6][imgn-1] == null){imgn = projects[projectClickCounter][6].length-1;}
-            else {imgn=imgn-1;}
          
-            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][6][imgn]+"' class='img' />";
-            document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][7][imgn];
+         if (songListCounterd < songs.length && songListCounter < songs.length && songListCounterb < songs.length && songListCounterc < songs.length) { //all rows except the last one        
+          if (songlistcontents == null){
+          songlistcontents = "<div class='grid-containera'><div class='grid-item' style='margin-right:70px; margin-top: 10px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px; margin-top: 10px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div><div class='grid-item' style='margin-top: 10px;'><section id='song"+songListCounterc+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterc][5][0]+"'><h2>"+songs[songListCounterc][0][0]+"</h2></section></div></div>";
          }
-         function right(){
-                      if (projects[projectClickCounter][6][imgn+1] == null){imgn = 0;}
-            else {imgn=imgn+1;}
-            document.getElementById('imageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][6][imgn]+"' class='img' />";
-             document.getElementById('imageCaption').innerHTML = projects[projectClickCounter][7][imgn];
+         else{
+             songlistcontents = songlistcontents+"<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='song"+songListCounterc+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterc][5][0]+"'><h2>"+songs[songListCounterc][0][0]+"</h2></section></div></div>";
+         }}
+         
+         
+         else if (songListCounterd >= songs.length && songListCounter < songs.length && songListCounterb < songs.length && songListCounterc < songs.length){ //the last row if it has 3 images
+                
+            if(songlistcontents == null){
+                songlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='song"+songListCounterc+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterc][5][0]+"'><h2>"+songs[songListCounterc][0][0]+"</h2></section></div></div>";
+             }
+            else{
+               songlistcontents = songlistcontents + "<div class='grid-containera'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div><div class='grid-item'><section id='song"+songListCounterc+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterc][5][0]+"'><h2>"+songs[songListCounterc][0][0]+"</h2></section></div></div>";
+            }}
+         
+           else if (songListCounterd >= songs.length && songListCounter < songs.length && songListCounterb < songs.length && songListCounterc >= songs.length){ //the last row if it has 3 images
+                
+            if(songlistcontents == null){
+                songlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div></div>";
+            }
+            else{
+               songlistcontents = songlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div><div class='grid-item' style='margin-right:70px;'><section id='song"+songListCounterb+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounterb][5][0]+"'><h2>"+songs[songListCounterb][0][0]+"</h2></section></div></div>";
+            }}
+         
+         
+            else if (songListCounterd >= songs.length && songListCounter < songs.length && songListCounterb >= songs.length && songListCounterc >= songs.length){ //the last row if it has 3 images
+                
+            if(songlistcontents == null){
+                songlistcontents = "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div></div>";
+            }
+            else{
+               songlistcontents = songlistcontents + "<div class='grid-containerb'><div class='grid-item' style='margin-right:70px;' ><section id='song"+songListCounter+"' class='songz' onclick='songModal(this.id)'><img src='"+songs[songListCounter][5][0]+"'><h2>"+songs[songListCounter][0][0]+"</h2></section></div></div>";
+            }}
+         
+         songListCounter = songListCounter+3;
+         songListCounterb= songListCounterb+3;
+         songListCounterc= songListCounterc+3;
+         songListCounterd= songListCounterd+3;
+         
+         }
+         document.getElementById('songlist').innerHTML = songlistcontents;
+         }
+         
+         function projectleft(){
+            if (projects[projectClickCounter][7][pimgn-1] == null){pimgn = projects[projectClickCounter][7].length-1;}
+            else {pimgn=pimgn-1;}
+         
+            document.getElementById('pimageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][7][pimgn]+"' class='img' /></a>";
+            document.getElementById('pimageCaption').innerHTML = projects[projectClickCounter][8][pimgn];
+         }
+         function projectright(){
+                      if (projects[projectClickCounter][7][pimgn+1] == null){pimgn = 0;}
+            else {pimgn=pimgn+1;}
+            document.getElementById('pimageSlideshow').innerHTML = "<img src='"+projects[projectClickCounter][7][pimgn]+"' class='img' />";
+             document.getElementById('pimageCaption').innerHTML = projects[projectClickCounter][8][pimgn];
          }
          
             function projectModal(clicked_id){
-               var projectId = document.getElementById(clicked_id).childNodes[1].innerHTML;
+               pversionlist ="";
+               pversionmatch = 0;
+               if(clicked_id.includes("berry")){
+               projectId = document.getElementById(clicked_id).innerHTML;
+            }
+            else{
+               projectId = document.getElementById(clicked_id).childNodes[1].innerHTML;
+            }
+            projectClickCounter = 0;
                while (projectId != projects[projectClickCounter][0][0]){
                   projectClickCounter++;// the problem
                   if (projectClickCounter >= projects.length) {
                      projectClickCounter = 0;}}
+
+                     while (pversionmatch < projects.length){
+                     if (projects[pversionmatch][13][0] == projects[projectClickCounter][0][0]){
+                        pversionlist = pversionlist + "<span id='berry"+pversionmatch+"' class='projectz' onclick='projectModal(this.id)'>" + projects[pversionmatch][0][0] + "</span>";
+                     }
+                     pversionmatch++;
+                  }
+                  if (pversionlist == "josh"){
+
+                  }
+                  pversionlist = pversionlist.replace('josh', '');
+                  pversionlist = "<button class='modal-item'>versions<span class='modal-down'>+</span></button><div class='panel listen'><p style='margin-top:0px;'>"+pversionlist+"</p></div>";
+
                      tracklistCounter = 0;
                while (tracklistCounter < projects[projectClickCounter][5].length){
                   if (tracklistCounter == 0){
-                tracklist = "0"+(tracklistCounter+1)+". "+"<span class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>"; }
+                tracklist = "0"+(tracklistCounter+1)+". "+"<span class='tracklistz' style='font-weight: bold;'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>"; }
                 else if (9>tracklistCounter>0){
-                  tracklist =  tracklist+" 0"+(tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
+                  tracklist =  tracklist+" 0"+(tracklistCounter+1)+". "+"<span class='tracklistz' style='font-weight: bold;'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
              else{
-                tracklist =  tracklist+(tracklistCounter+1)+". "+"<span id='tracklist"+tracklistCounter+"' class='tracklistz'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
+                tracklist =  tracklist+(tracklistCounter+1)+". "+"<span class='tracklistz' style='font-weight: bold;'>"+projects[projectClickCounter][5][tracklistCounter]+"</span><br>";}
                tracklistCounter++; }
                var vowel;
                var vowelIndex = "^[aieouAIEOU].*";
                if (projects[projectClickCounter][1][0].charAt(0).match(vowelIndex)){vowel = "an";}
                else { vowel = "a";}
+
+              plistencontents = "caleb";
+               if (projects[projectClickCounter][12][0] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][0]+"'>spotify</a></span>";}
+               if (projects[projectClickCounter][12][1] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][1]+"'>compact disc</a></span>";}
+               if (projects[projectClickCounter][12][2] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][2]+"'>apple</a></span>";}
+               if (projects[projectClickCounter][12][3] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][3]+"'>deezer</a></span>";}
+               if (projects[projectClickCounter][12][4] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][4]+"'>vinyl</a></span>";}
+               if (projects[projectClickCounter][12][5] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][5]+"'>soundcloud</a></span>";}
+               if (projects[projectClickCounter][12][6] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][6]+"'>cassette</a></span>";}
+               if (projects[projectClickCounter][12][7] != null ){plistencontents = plistencontents + "<span><a href='"+projects[projectClickCounter][12][7]+"'>digital</a></span>";}
+              plistencontents = plistencontents.replace('caleb', '');
          
-               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter][0][0]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p><b>"+projects[projectClickCounter][0][0]+"</b> is "+vowel+" "+projects[projectClickCounter][1][0]+" that released on "+projects[projectClickCounter][2][0]+". DOOM "+projects[projectClickCounter][3][0]+". The project was "+projects[projectClickCounter][4][0]+"</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>"+tracklist+"</p></div><button class='modal-item'>images<span class='modal-down'>+</span></button><div class='panel'><div class='cover'><button type='button' class='btn left' onclick='left()'>&#10094;</button><div id='imageSlideshow'><img src='"+projects[projectClickCounter][6][imgn]+"' class='img' /></div><button  type='button' class='btn right' onclick='right()'>&#10095;</button></div><p class='cover-text' id='imageCaption'>"+projects[projectClickCounter][7][imgn]+"</p></div><button class='modal-item'>attached media<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>"+projects[projectClickCounter][10][imgn]+"</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><img class='spotify' src='listenicons/spotify.png'><img class='apple' src='listenicons/apple.png'><img class='cd' src='listenicons/cd.png'><img class='vinyl' src='listenicons/vinyl.png'><img class='soundcloud' src='listenicons/soundcloud.png'><img class='youtube' src='listenicons/youtube.png'><img class='deezer' src='listenicons/deezer.png'></div>";
+               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+projects[projectClickCounter][0][0]+"</div>"+pversionlist+"<button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p><b>"+projects[projectClickCounter][0][0]+"</b> is "+vowel+" "+projects[projectClickCounter][1][0]+" that released on "+projects[projectClickCounter][2][0]+". DOOM "+projects[projectClickCounter][3][0]+".<br><br>The project was "+projects[projectClickCounter][4][0]+"<br><br>"+projects[projectClickCounter][4][1]+"</p></div><button class='modal-item'>tracklist<span class='modal-down'>+</span></button><div class='panel'><p>"+tracklist+"</p></div><button class='modal-item'>images<span class='modal-down'>+</span></button><div class='panel' style='font-weight: bold;'><div class='cover'><button type='button' class='btn left' onclick='projectleft()'>&#10094;</button><div id='pimageSlideshow'><img src='"+projects[projectClickCounter][7][pimgn]+"' class='img' /></div><button  type='button' class='btn right' onclick='projectright()'>&#10095;</button></div><p class='cover-text' id='pimageCaption'>"+projects[projectClickCounter][8][pimgn]+"</p></div><button class='modal-item'>attached media<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>"+projects[projectClickCounter][11][pimgn]+"</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><p style='margin-top:0px;'>"+plistencontents+"</p></div>";
          
                var acc = document.getElementsByClassName("modal-item");
                      var allplus = null;
@@ -141,23 +265,97 @@
            });
          }
             }
+
+        /*  function songleft(){
+            if (songs[songClickCounter][5][simgn-1] == null){simgn = songs[songClickCounter][5].length-1;}
+            else {simgn=simgn-1;}
+         
+            document.getElementById('simageSlideshow').innerHTML = "<img src='"+songs[songClickCounter][7][simgn]+"' class='img' /></a>";
+            document.getElementById('simageCaption').innerHTML = songs[songClickCounter][6][simgn];
+         }
+         function songright(){
+                      if (songs[songClickCounter][5][simgn+1] == null){simgn = 0;}
+            else {simgn=simgn+1;}
+            document.getElementById('imageSlideshow').innerHTML = "<img src='"+songs[songClickCounter][7][simgn]+"' class='img' />";
+             document.getElementById('imageCaption').innerHTML = songs[songClickCounter][6][simgn];
+         }*/
+
+         function songModal(clicked_id){
+         if(clicked_id.includes("berry")){
+               songId =  document.getElementById(clicked_id).innerHTML;
+            }
+            else{
+               songId = document.getElementById(clicked_id).childNodes[1].innerHTML;
+            }
+               while (songId != songs[songClickCounter][0][0]){
+                  songClickCounter++;
+                    if (songClickCounter >= songs.length) {
+                     songClickCounter = 0;}
+               }
+
+               var vowel;
+               var vowelIndex = "^[aieouAIEOU].*";
+               if (songs[songClickCounter][1][0].charAt(0).match(vowelIndex)){vowel = "an";}
+               else { vowel = "a";}
+              slistencontents = "caleb";
+               if (songs[songClickCounter][10][0] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][0]+"'>spotify</a></span>";}
+               if (songs[songClickCounter][10][1] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][1]+"'>compact disc</a></span>";}
+               if (songs[songClickCounter][10][2] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][2]+"'>apple</a></span>";}
+               if (songs[songClickCounter][10][3] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][3]+"'>deezer</a></span>";}
+               if (songs[songClickCounter][10][4] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][4]+"'>vinyl</a></span>";}
+               if (songs[songClickCounter][10][5] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][5]+"'>soundcloud</a></span>";}
+               if (songs[songClickCounter][10][6] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][6]+"'>cassette</a></span>";}
+               if (songs[songClickCounter][10][7] != null ){slistencontents = slistencontents + "<span><a href='"+songs[songClickCounter][10][7]+"'>digital</a></span>";}
+
+              slistencontents = slistencontents.replace('caleb', '');
+         
+               document.getElementById('modal-content').innerHTML = "<div class='modal-title'>"+songs[songClickCounter][0][0]+"</div><button class='modal-item'>description<span class='modal-down'>+</span></button><div class='panel'><p><b>"+songs[songClickCounter][0][0]+"</b> released on "+songs[songClickCounter][1][0]+". DOOM "+songs[songClickCounter][2][0]+".<br><br>The song was "+songs[songClickCounter][3][0]+"<br><br>"+songs[songClickCounter][3][1]+"</p></div><button class='modal-item'>images<span class='modal-down'>+</span></button><div class='panel' style='font-weight: bold;'><div class='cover'><button type='button' class='btn left' onclick='songleft()'>&#10094;</button><div id='imageSlideshow'><img src='"+songs[songClickCounter][5][simgn]+"' class='img' /></div><button type='button' class='btn right' onclick='songright()'>&#10095;</button></div><p class='cover-text' id='imageCaption'>"+songs[songClickCounter][6][simgn]+"</p></div><button class='modal-item'>attached media<span class='modal-down'>+</span></button><div class='panel'><p>content</p></div><button class='modal-item'>notes<span class='modal-down'>+</span></button><div class='panel'><p>"+songs[songClickCounter][9][simgn]+"</p></div><button class='modal-item'>listen<span class='modal-down'>+</span></button><div class='panel listen'><p style='margin-top:0px;'>"+slistencontents+"</p></div>";
+         
+               var acc = document.getElementsByClassName("modal-item");
+                     var allplus = null;
+                    var plus = null;
+         for (i = 0; i < acc.length; i++) {
+           acc[i].addEventListener("click", function() {
+         
+         for (let j = 0; j < acc.length; j++) {
+         if(j!=i){     
+             acc[j].classList.remove("active");
+         acc[j].nextElementSibling.style.maxHeight = null;
+         allplus = acc[j].querySelector('.modal-down');
+         allplus.innerHTML = "+";
+         }
+         }
+             this.classList.toggle("active");
+             var panel = this.nextElementSibling;
+            plus = this.querySelector('.modal-down');
+         
+             if (panel.style.maxHeight) {
+               plus.innerHTML = "+";
+               panel.style.maxHeight = null;
+             } else {
+               plus.innerHTML = "-";
+               panel.style.maxHeight = panel.scrollHeight + "px";
+             } 
+           });
+         }
+            }  
       </script>
    </head>
    <body>
-      <a href="https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0"><img class="doomimg" src="mask.webp"></a>
+      <!--<a href="https://docs.google.com/spreadsheets/d/1n1T9ncenNKIsB9xkeCFpeitjbE5dN0jr8-fmo8uLWXU/edit#gid=0"><img class="doomimg" src="mask.webp"></a>-->
       <div class="topnav">
          <a id="projects">projects</a>
          <a id="songs">songs</a>
-         <a id="interviews">interviews</a>
-         <a >extras</a>
+        <!-- <a id="interviews">interviews</a>
+         <a >extras</a>-->
          <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
-         <input style="float: right;" type="search" id="search" placeholder="search..." tabindex="-1" autofocus="autofocus">
+       <input style="float: right;" type="search" id="search" placeholder="search..." tabindex="-1">
       </div>
       <div class="logo" id="logo"><img src="https://3dpk.co.uk/doom/Images/doomtranny.png"></div>
       <div id="myModal" class="modalu">
          <!-- Modal content -->
          <div class="modalu-content">
-            <p><b style="font-size: 18px;">overview:</b><br>This is a comprehensive database of all work that DOOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.<br><br><b style="font-size: 18px;">coming soon:</b><br>-filtered search<br>-finalized descriptios<br>-spreadsheet formatting fixed<br>-list icons toggle added<br>-project versions integrated<br>-formatted mobile version<br>-itemized scroll</p>
+            <p><b style="font-size: 18px;">overview:</b><br>This is a comprehensive database of all work that DOOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.<br><br><b style="font-size: 18px;">coming soon:</b><br>-project and song versions<br>-itemized scroll<br>-images, videos, and interviews<br>-appearence update<br>-filtered search<br>-mobile version</p>
          </div>
       </div>
       <div class="menu" id="projectlist" style="position: fixed;
@@ -165,10 +363,20 @@
          top:50%;
          /* bring your own prefixes */
          transform: translate(-50%, -50%); overflow-y: scroll; height: 445px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll;
-         /*scroll-snap-points-y: repeat(435px);
+         /*scroll-snap-points-y: repeat(445px);
          scroll-snap-type: y mandatory;
-         scroll-behavior: auto;*/">
+         scroll-behavior: smooth;*/">
          <script>projectList();</script>
+      </div>
+       <div class="menu" id="songlist" style="position: fixed;
+         left: 50%;
+         top:50%;
+         /* bring your own prefixes */
+         transform: translate(-50%, -50%); overflow-y: scroll; height: 445px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll;
+         /*scroll-snap-points-y: repeat(445px);
+         scroll-snap-type: y mandatory;
+         scroll-behavior: smooth;*/">
+         <script>songList();</script>
       </div>
       <div class='modal-background'>
          <div class='modal-content' id='modal-content'></div>
