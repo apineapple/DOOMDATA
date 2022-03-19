@@ -21,20 +21,31 @@ img{
 -o-user-drag: none;
 user-drag: none;
 }
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  position: absolute;
+  left: -50px;
+  bottom: -110px;
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent; 
+  border-right:150px solid lightblue; 
+  transform: rotate(-45deg);
+}
 .doomimg {
 left: 25px;
 bottom: 20px;
 position: absolute;
 width: 60px;
 height: 60px;
-border-radius: 15%;
 background-color: lightblue;
+border-radius: 15%;
 transition: all .2s ease-in-out;
 }
-.doomimg:hover {
+/*.doomimg:hover {
 background-color: white;
 transform: scale(1.1);
-}
+}*/
 input{
 height: 30px;
 width: 250px;
@@ -49,7 +60,7 @@ user-select: none;
 -khtml-user-select: none;
 -webkit-user-select: none;
 -o-user-select: none;
-border-radius: 5px;
+border-radius:  5px;
 padding-right: 10px;
 }
 ::placeholder {
@@ -88,18 +99,61 @@ width: auto;
 padding-left: 10px;
 padding-right: 10px;
 }*/
+.store-item {position: relative; width: 1160px; background-color: lightblue; height: 71px !important;
+  max-width: 1160px !important;
+  width: 1160px;
+  margin-top: -47px;
+  margin-left: 120px;
+  overflow-y: scroll;
+  overflow: hidden;
+  max-height: 52px;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+.store-item img {height: 300px !important; width: auto !important;}
+.store-item h2 {margin-left: 15px;
+  /*margin-top: 10px;*/
+  font-size: 16pt;
+  max-width: 400px !important;
+  width: 400px;
+  margin-top: -290px;
+  margin-left: 500px;
+  overflow: hidden;
+  max-height: 52px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.store-item:hover { color: white; filter: grayscale(100%); width:  1102px; height: 200px; z-index: 999;}
+
+
+.list-item {position: relative; width: 500px; background-color: lightblue; height: 71px !important; border-radius: 5px;}
+.list-item {transition: all .2s ease-in-out;}
+.list-item img {height: 71px !important; width: auto !important;}
+.list-item h2 {margin-left: 15px;
+  /*margin-top: 10px;*/
+  font-size: 16pt;
+  max-width: 400px !important;
+  width: 400px;
+  margin-top: -47px;
+  margin-left: 120px;
+  overflow: hidden;
+  max-height: 52px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.list-item:hover {transform: scale(.95); color: white; filter: grayscale(100%);}
 .grid-item {position: relative; background-color: lightblue; padding-top: 20px; height: 405px !important; max-height: 405px; padding-left: 20px; padding-right: 20px; border-radius: 5px;}
 .grid-item {transition: all .2s ease-in-out;}
-.grid-item:hover {transform: scale(.95); color: white;}
+.grid-item:hover {transform: scale(.97); color: white; filter: grayscale(100%);}
 .grid-containera {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 25px;}
-.grid-containerb {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 10px;}
+.grid-containerb {display: grid; width:20%; grid-template-columns: auto auto auto; margin-bottom: 0px !important;}
 .menu img{
   vertical-align: middle;
   width: 300px;
   height: auto;
   border-radius: 5px;
 }
-.menu h2{
+.grid-item h2{
   margin-left: 15px;
   /*margin-top: 10px;*/
   font-size: 16pt;
@@ -140,6 +194,10 @@ height: 100%; /* Full height */
 overflow: auto; /* Enable scroll if needed */
 background-color: rgb(0,0,0); /* Fallback color */
 background-color: rgba(173,216,230,1); /* Black w/ opacity */
+background-color: lightgrey;
+/*background-image: url("https://www.stonesthrow.com/app/uploads/2021/01/doom-quas.jpg");
+background-repeat: no-repeat;
+background-size: contain;*/
 }
 .modal-content {
 position: fixed;
@@ -172,6 +230,11 @@ top: 0;
 position: sticky;
 z-index: 300;
 background-color: white;
+white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    overflow: hidden
 }
 .modal-item{
 cursor: pointer;
@@ -287,7 +350,6 @@ transform: translate(-50%, -50%);
   margin-right: 15px;
   margin-top: 5px;
   border-radius: 5px;
-
 }
 
 .btn {
@@ -301,12 +363,6 @@ transform: translate(-50%, -50%);
 .btn:hover{
   transform: scale(1.2);
   color: white;
-}
-.left{
-margin-left: 30px;
-}
-.right{
-margin-right: 30px;
 }
 .cover-text{
 margin: 0 auto;
@@ -325,7 +381,7 @@ color: white;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: lightblue; /* Black w/ opacity */
+  background-color: lightgrey; /* Black w/ opacity */
 }
 /* Modal Content */
 .modalu-content {
@@ -347,5 +403,18 @@ color: white;
   color: white;
 }
 .listen span:hover{
+  color: white;
+}
+.viewb{
+  position: absolute;
+  top: 70px;
+right: 32px;
+border-radius: 15px;
+padding-top: 5px;
+padding-bottom: 5px;
+border: none;
+background-color: #d1d1d1;
+}
+.viewb:hover{
   color: white;
 }
