@@ -1,85 +1,56 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="jquery.js"></script>
-      <script src="javascript.js"></script>
-      <script src="fulljquery.js"></script>
-      <link rel="stylesheet" href="style.css">
-      <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
-   </head>
-   <body>
-      <!--<div class="arrow-left"></div>
-     <a href="https://docs.google.com/spreadsheets/d/1XZ74_qb4IRlSuTKlWYQ9H3TmsHAP9yDaqBlm1S6gIkM/edit?usp=sharing"><img class="doomimg" src="mask.webp"></a>-->
-      <div class="topnav">
-         <a id="projects">projects</a>
-         <a id="songs">songs</a>
-         <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
-       <input style="float: right;" type="search" autocomplete="off" id="search" placeholder="search..." tabindex="-1">
-      </div>
 
-      <!-- <button onclick="viewb()" class ="viewb" id="viewb">view: list</button>-->
-      <div class="logo" id="logo" style="filter: invert(100%);"><img src="https://drive.google.com/uc?export=view&id=1wjWXmRW5D6G1axfiTk7AcBVorqBqSIiR"></div>
-      <div id="myModal" class="modalu">
-         <div class="modalu-content">
-            <p><b style="font-size: 18px;">overview:</b><br>This is a comprehensive database of all work that DOOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.<br><br><b style="font-size: 18px;">coming soon:</b><br>-song versions<br>-images, videos, and interviews<br>-appearence update<br>-filtered search<br>-mobile version</p>
-         </div>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="javascript.js"></script>
+   <script src="jquery.js"></script>
+   <script src="fulljquery.js"></script>
+   <link rel="stylesheet" href="style.css">
+   <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'> </head>
+
+<body>
+   <div class="topnav"> <a id="music">music</a>
+      <!--<a id="interviews">interviews</a>--><a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
+      <input style="float: right;" type="search" autocomplete="off" id="search" placeholder="search..." tabindex="-1"> </div> 
+      <img class="filter" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" id="filter">
+   <button onclick="typ()" class="viewb" id="type">type:<span> projects</span></button>
+   <button onclick="sort()" class="viewb" style="margin-top: 30px !important;" id="sort">sort:<span> a to z</span></button>
+   <button onclick="version()" class="viewb" style="margin-top: 60px !important;" id="version">versions:<span> hidden</span></button>
+   <!--<button class="viewb" style="margin-top: 90px !important;" id="role">DOOM's Role:<span> any</span></button>-->
+   <div class="logo" id="logo" style="filter: invert(100%);"><img src="https://drive.google.com/uc?export=view&id=1wjWXmRW5D6G1axfiTk7AcBVorqBqSIiR"></div>
+   <div id="myModal" class="modalu">
+      <div class="modalu-content">
+         <p><b style="font-size: 18px;">overview:</b>
+            <br>This is a comprehensive database of all work that OOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.
+            <br>
+            <br><b style="font-size: 18px;">coming soon:</b>
+            <br>-complete project list
+            <br>-improved image carousels
+            <br>-song versions
+            <br>-defined color palette
+            <br>-tweaked animations
+            <br>-all songs, images, videos, and interviews
+            <br>-general appearence update
+            <br>-search filters
+            <br>-mobile version
+            <br>-unreleased/leaked material???</p>
       </div>
-           <div class="menu" id="listlist" style="position: fixed;
-         left: 50%;
-         top:50%;
-         /* bring your own prefixes */
-         transform: translate(-50%, -50%); overflow-y: scroll; overflow-x: hidden; height: 425px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll !important;
-         scroll-snap-points-y: repeat(425px);
-         scroll-snap-type: y mandatory;
-         scroll-behavior: smooth;">
-         <script>projectListList();</script>
-      </div>
-      <!-- <div class="menu" id="storelist" style="position: fixed;
-         left: 50%;
-         top:50%;
-         /* bring your own prefixes */
-         transform: translate(-50%, -50%); overflow-y: scroll; height: 425px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll;
-         /*scroll-snap-points-y: repeat(425px);
-         scroll-snap-type: y mandatory;
-         scroll-behavior: smooth;*/">
-         <script>projectStoreList();</script>
-      </div>
-      <div class="menu" id="projectlist" style="position: fixed;
-         left: 50%;
-         top:50%;
-         /* bring your own prefixes */
-         transform: translate(-50%, -50%); overflow-y: scroll; height: 425px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll;
-         /*scroll-snap-points-y: repeat(445px);
-         scroll-snap-type: y mandatory;
-         scroll-behavior: smooth;*/">
-         <script>projectList();</script>
-      </div>-->
-       <div class="menu" id="songlist" style="position: fixed;
-         left: 50%;
-         top:50%;
-         /* bring your own prefixes */
-         transform: translate(-50%, -50%); overflow-y: scroll; overflow-x: hidden; height: 425px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll !important;
-         scroll-snap-points-y: repeat(425px);
-         scroll-snap-type: y mandatory;
-         scroll-behavior: smooth;">
-         <script>songList();</script>
-      </div>
-      <div class='modal-background'>
-         <div class='modal-content' id='modal-content'></div>
-      </div>
-      <!-- <div class="version">v. 0.5</div>-->
-     <script>
-         function viewb(){
-            if (document.getElementById("viewb").innerHTML == "view: grid"){
-               document.getElementById("viewb").innerHTML = "view: list";
-            }
-            else{
-               document.getElementById("viewb").innerHTML = "view: grid"
-            }
-         }
-         var modal = document.getElementById("myModal");
+   </div>
+   <div class="menu" id="listlist">
+      <script>projectListList();</script>
+   </div>
+   <div class="menu" id="songlist">
+      <script>songList();</script>
+   </div>
+   <div class='modal-background'>
+      <div class='modal-content' id='modal-content'></div>
+   </div>
+   <!--<div class="version">v. 0.5</div>-->
+   <div class="menu" id="searchlist"></div>
+   <script>
+       var modal = document.getElementById("myModal");
          var btn = document.getElementById("logo");
          btn.onclick = function() {
          modal.style.display = "block";
@@ -89,51 +60,6 @@
          modal.style.display = "none";
          }
     }
-    var input = document.getElementById("search");
-    var searchContents = "charlie";
-    var searchListContents = "";
-    var searchCounter = 0;
-    function searchList(){
-          searchListContents = "arandomstringnoonewouldevertype";
-      searchCounter = 0;
-      searchContents = document.getElementById("search").value;
-      //console.clear();
-               while (searchCounter < projects.length) {
-               if (projects[searchCounter][0][0].toLowerCase().includes(searchContents.toLowerCase()) == true && searchCounter != projects.length-1){
-                 searchListContents  = searchListContents+"<div style='margin-bottom: 17.5px' class='list-item'><section id='project"+searchCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[searchCounter][7][0]+"'><h2>"+projects[searchCounter][0][0]+"</h2></section></div>";
-               }
-               else if (projects[searchCounter][0][0].toLowerCase().includes(searchContents.toLowerCase()) == true && searchCounter == projects.length-1){
-                  searchListContents  = searchListContents+"<div style='margin-bottom: 0px' class='list-item'><section id='project"+searchCounter+"' class='projectz' onclick='projectModal(this.id)'><img src='"+projects[searchCounter][7][0]+"'><h2>"+projects[searchCounter][0][0]+"</h2></section></div>";
-               }
-               searchCounter++;
-            }
-         if (searchListContents == "arandomstringnoonewouldevertype") {
-            searchListContents = "<div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no results found</h2></div>";
-         }
-         searchListContents = searchListContents.replace('arandomstringnoonewouldevertype', '');
-         document.getElementById('searchlist').innerHTML = searchListContents;
-         }
-
-// Execute a function when the user releases a key on the keyboard
-input.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
-  if (event.keyCode === 13) {
-    // Cancel the default action, if needed
-    searchList();
-    event.preventDefault();
-    // Trigger the button element with a click
-  }
-});    
-      </script>
-            <div class="menu" id="searchlist" style="position: fixed;
-         left: 50%;
-         top:50%;
-         /* bring your own prefixes */
-         transform: translate(-50%, -50%); overflow-y: scroll; overflow-x: hidden; height: 425px !important; padding-left: 10px;padding-right: 10px; overflow-y: scroll !important;
-         scroll-snap-points-y: repeat(425px);
-         scroll-snap-type: y mandatory;
-         scroll-behavior: smooth;">
-         <script>searchList();</script>
-      </div>
-   </body>
+   </script>
+</body>
 </html>
