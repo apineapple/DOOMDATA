@@ -538,6 +538,8 @@ a {
   background-color: lightgreen;
   transition: all .2s ease-in-out;
   text-align: left;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
 }
 
 .viewb:hover span {
