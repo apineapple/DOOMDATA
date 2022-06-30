@@ -10,34 +10,46 @@
    <link rel="stylesheet" href="style.css">
    <link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'> </head>
 
-<body>
+<body onload="load()">
+   <div id="loader">
+<img src="https://drive.google.com/uc?export=view&id=1wjWXmRW5D6G1axfiTk7AcBVorqBqSIiR">
+</div>
+   <div style="display:none;" id="myDiv">
    <div class="topnav"> <a id="music">music</a>
+      <a id="about">about</a>
       <!--<a id="interviews">interviews</a>--><a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank">feedback</a>
       <input style="float: right;" type="search" autocomplete="off" id="search" placeholder="search..." tabindex="-1"> </div> 
-      <img class="filter" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" id="filter">
+      <!--<img class="filter" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" id="filter">-->
    <button onclick="typ()" class="viewb" id="type">type:<span> projects</span></button>
-   <button onclick="sort()" class="viewb" style="margin-top: 30px !important;" id="sort">sort:<span> a to z</span></button>
-   <button onclick="version()" class="viewb" style="margin-top: 60px !important;" id="version">versions:<span> hidden</span></button>
+   <button onclick="sort()" class="viewb" style="margin-top: 35px !important;" id="sort">sort:<span> a to z</span></button>
+   <button onclick="version()" class="viewb" style="margin-top: 70px !important;" id="version">versions:<span> hidden</span></button>
    <!--<button class="viewb" style="margin-top: 90px !important;" id="role">DOOM's Role:<span> any</span></button>-->
    <div class="logo" id="logo" style="filter: invert(100%);"><img src="https://drive.google.com/uc?export=view&id=1wjWXmRW5D6G1axfiTk7AcBVorqBqSIiR"></div>
-   <div id="myModal" class="modalu">
-      <div class="modalu-content">
+      <div class="modalu-content" id="myModal">
          <p><b style="font-size: 18px;">overview:</b>
-            <br>This is a comprehensive database of all work that OOM has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect/incomplete information please leave any feedback you may have.
+            <br>This is a comprehensive database of all work that <b>DOOM</b> has put out across his life under all of his various monikers and in various roles. If you have any questions or feel there is incorrect or incomplete information please leave any feedback you may have <a href="https://docs.google.com/forms/d/e/1FAIpQLScQqvx082NuK_04MmuGWgDLWsTXBgDyL4RQBWtveKLAE3wHEA/viewform" target="_blank" class="hyper"><b>here</b></a>.
             <br>
             <br><b style="font-size: 18px;">coming soon:</b>
             <br>-complete project list
             <br>-improved image carousels
-            <br>-song versions
-            <br>-defined color palette
+            <br>-additional notes properly formatted
+            <br>-description properly formatted
+            <br>-complete tracklist information section
+            <br>-scrolling text overflow
+            <br>-song versions + versions linked
             <br>-tweaked animations
             <br>-all songs, images, videos, and interviews
-            <br>-general appearence update
-            <br>-search filters
+            <br>-general appearence + font update
+            <br>-search filters running
+            <br>-user mode in spreadsheet
+            <br>-panels work as intended
             <br>-mobile version
-            <br>-unreleased/leaked material???</p>
+            <br>-unreleased/leaked material???
+            <br>
+            <br><b style="font-size: 16px;">v. 0.6.25</b>
+
+         </p>
       </div>
-   </div>
    <div class="menu" id="listlist">
       <script>projectListList();</script>
    </div>
@@ -49,17 +61,18 @@
    </div>
    <!--<div class="version">v. 0.5</div>-->
    <div class="menu" id="searchlist"></div>
-   <script>
-       var modal = document.getElementById("myModal");
-         var btn = document.getElementById("logo");
-         btn.onclick = function() {
-         modal.style.display = "block";
-         }
-         window.onclick = function(event) {
-         if (event.target == modal) {
-         modal.style.display = "none";
-         }
-    }
-   </script>
+</div>
+<script>
+var myVar;
+
+function load() {
+  myVar = setTimeout(showPage, 10);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
 </body>
 </html>
