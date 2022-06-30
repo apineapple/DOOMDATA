@@ -5,6 +5,7 @@ var searchCounter = 0;
 
 function initialize() {
     $(document).ready(function() {
+        $("#myModal").hide();
         $("#projectlist").hide();
         $("#listlist").hide();
         $("#storelist").hide();
@@ -13,34 +14,49 @@ function initialize() {
         $(".modal-description").hide(); //neccisary?
         $("#allpatch").hide();
         $(".viewb").hide();
-        $("#filter").hide();
         $(".tersion").hide();
 
-        $("#filter").click(function() {
-            if ($(".viewb").is(':visible')) {
-                $(".viewb").hide();
-            } else {
-                $(".viewb").show();
-            }
-        });
-        $("#music").click(function() {
-            $("#songlist").hide();
-            $("#searchlist").hide();
-            if ($("#logo").is(':visible')) {
-                $("#filter").show();
+        $('#music,#logo').click(function() {
+            if ($("#listlist").is(':hidden') && $("#searchlist").is(':hidden')) {
+                $("#songlist").hide();
                 $("#logo").hide();
                 $("#listlist").show();
                 $("#songlist").hide();
                 $("#music").css("color", "white");
+                $("#about").css("color", "black");
+                $("#myModal").hide();
+                $(".viewb").show();
             } else {
                 document.getElementById("type").innerHTML = "type:<span> projects</span>";
-                $("#filter").hide();
                 $(".viewb").hide();
                 $("#logo").show();
                 $("#projectlist").hide();
                 $("#listlist").hide();
                 $("#songlist").hide();
                 $("#music").css("color", "black");
+                document.getElementById("search").value = "";
+            }
+            $("#searchlist").hide();
+        });
+
+        $("#about").click(function() {
+            if ($("#myModal").is(':hidden')) {
+                $("#myModal").show();
+                $("#about").css("color", "white");
+                document.getElementById("type").innerHTML = "type:<span> projects</span>";
+                $(".viewb").hide();
+                $("#projectlist").hide();
+                $("#listlist").hide();
+                $("#songlist").hide();
+                $("#music").css("color", "black");
+                $("#logo").hide();
+                $("#searchlist").hide();
+                document.getElementById("search").value = "";
+            }
+            else {
+                $("#about").css("color", "black");
+                $("#myModal").hide();
+                $("#logo").show();
             }
         });
 
@@ -51,6 +67,16 @@ function initialize() {
             } else if ($("#songlist").is(':visible') && $("#music").css("color", "white")) {
                 $("#songlist").hide();
                 $("#listlist").show();
+            }
+        if ($("#searchlist").is(':visible')){
+                if (document.getElementById('type').innerHTML.indexOf("projects") != -1) {
+                $("#songsearchcontainer").hide();
+                $("#projectsearchcontainer").show();
+            }
+            else{
+                $("#songsearchcontainer").show();
+                $("#projectsearchcontainer").hide();
+            }
             }
         });
 
@@ -65,7 +91,6 @@ function initialize() {
 
         $(document).on('click', '.projectz', function() {
             $(".viewb").hide();
-            $("#filter").hide();
             $(".modal-background").show();
             $("#main").hide();
             $("#projectlist").hide();
@@ -74,9 +99,8 @@ function initialize() {
             $("#interviewlist").hide();*/
         });
 
-        $(".songz").click(function() {
+        $(document).on('click', '.songz', function() {
             $(".viewb").hide();
-            $("#filter").hide();
             $(".modal-background").show();
             $("#main").hide();
             $("#songlist").hide();
@@ -86,19 +110,25 @@ function initialize() {
 
         $(".modal-background").click(function() {
             $(".modal-background").hide();
-             $("#filter").show();
+             $(".viewb").show();
                 $("#searchlist").hide();
                 $("#logo").hide();
+                $("#music").css("color", "white");
+                if (document.getElementById('type').innerHTML.indexOf("projects") != -1) {
                 $("#listlist").show();
                 $("#songlist").hide();
-                $("#music").css("color", "white");
+                }
+                else{
+                $("#listlist").hide();
+                $("#songlist").show();
+                }
         }).children().click(function(e) {
             return false;
         });
     });
     $("#search").keypress(function(e) {
         if (e.which === 13) {
-            searchListContents = "arandomstringnoonewouldevertype";
+            searchListContents = "<div id='projectsearchcontainer'>arandomstringnoonewouldevertype";
             searchCounter = 0;
             searchContents = document.getElementById("search").value;
             //console.clear();
@@ -110,19 +140,46 @@ function initialize() {
                 }
                 searchCounter++;
             }
-            if (searchListContents == "arandomstringnoonewouldevertype") {
+            searchListContents = searchListContents + "</div><div id ='songsearchcontainer'>";
+            searchCounter = 0;
+            while (searchCounter < songs.length) {
+                if (songs[searchCounter][0][0].toLowerCase().includes(searchContents.toLowerCase()) == true && searchCounter != songs.length - 1) {
+                    searchListContents = searchListContents + "<div style='margin-bottom: 17.5px' class='list-item'><section id='blue" + searchCounter + "' class='songz' onclick='songModal(this.id)'><img src='https://drive.google.com/uc?export=view&id=" + songs[searchCounter][6][0] + "'><h2>" + songs[searchCounter][0][0] + "</h2></section></div>";
+                } else if (songs[searchCounter][0][0].toLowerCase().includes(searchContents.toLowerCase()) == true && searchCounter == songs.length - 1) {
+                    searchListContents = searchListContents + "<div style='margin-bottom: 0px' class='list-item'><section id='blue" + searchCounter + "' class='songz' onclick='songModal(this.id)'><img src='https://drive.google.com/uc?export=view&id=" + songs[searchCounter][6][0] + "'><h2>" + songs[searchCounter][0][0] + "</h2></section></div>";
+                }
+                searchCounter++;
+            }
+            searchListContents = searchListContents + "</div>";
+            if (searchListContents == "<div id='projectsearchcontainer'>arandomstringnoonewouldevertype</div><div id ='songsearchcontainer'></div>") {
                 searchListContents = "<div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no results found</h2></div>";
             }
             searchListContents = searchListContents.replace('arandomstringnoonewouldevertype', '');
             document.getElementById('searchlist').innerHTML = searchListContents;
+            if (document.getElementById('searchlist').innerHTML.indexOf('<div id="projectsearchcontainer"></div>') != -1){
+                searchListContents = searchListContents.replace("<div id='projectsearchcontainer'></div>", "<div id='projectsearchcontainer'><div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no projects found</h2></div></div>");
+            document.getElementById('searchlist').innerHTML = searchListContents;
+                }
+            else if (document.getElementById('searchlist').innerHTML.indexOf('<div id="songsearchcontainer"></div>') != -1){
+                    searchListContents = searchListContents.replace("<div id ='songsearchcontainer'></div>", "<div id ='songsearchcontainer'><div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no songs found</h2></div></div>");
+                    document.getElementById('searchlist').innerHTML = searchListContents;
+                }
 
+             if (document.getElementById('type').innerHTML.indexOf("projects") != -1 && searchListContents != "<div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no results found</h2></div>") {  
+                    $("#songsearchcontainer").hide();
+            }
+            else if (document.getElementById('type').innerHTML.indexOf("songs") != -1 && searchListContents != "<div style='height: 425px; line-height: 425px; text-align: center; background-color: white;'><h2>no results found</h2></div>"){
+                $("#projectsearchcontainer").hide();
+            }
+            $("#music").css("color", "white");
             $("#searchlist").show();
             $("#projectlist").hide();
+            $("#myModal").hide();
+            $(".viewb").show();
             $("#listlist").hide();
             $("#storelist").hide();
             $("#songlist").hide();
             $("#logo").hide();
-            $(".filter").show();
             $('form#search').submit();
             return false; //<---- Add this line
         }
